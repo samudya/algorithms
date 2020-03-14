@@ -1,6 +1,7 @@
 package queues;
 
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class ArrayQueue {
     private int[] arr;
@@ -12,6 +13,7 @@ public class ArrayQueue {
 
     /**
      * Puts item in the queue
+     *
      * @param item the queue item
      */
     public void enqueue(int item) {
@@ -23,19 +25,20 @@ public class ArrayQueue {
         if (rear <= arr.length) {
             arr[++rear] = item;
         } else {
-            throw new ArrayIndexOutOfBoundsException();
+            System.out.println("Full");;
         }
     }
 
     /**
      * Removes item from the queue
+     *
      * @return item
      */
     public int dequeue() {
 
         //if queue is empty.
         if (isEmpty()) {
-            throw new NoSuchElementException();
+            System.out.println("Empty");;
         }
 
         //store before shifting the array value
@@ -51,6 +54,7 @@ public class ArrayQueue {
 
     /**
      * Whether queue is empty or not
+     *
      * @return true if queue is empty else false.
      */
     public boolean isEmpty() {
@@ -59,6 +63,7 @@ public class ArrayQueue {
 
     /**
      * Returns size of the queue.
+     *
      * @return size
      */
     public int qsize() {
@@ -66,25 +71,23 @@ public class ArrayQueue {
     }
 
     public static void main(String[] args) {
-        ArrayQueue queue = new ArrayQueue(5);
-        queue.enqueue(12);
-        queue.enqueue(14);
-        queue.enqueue(13);
-        queue.enqueue(10);
-        queue.enqueue(11);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter size of the queue");
+        int size = sc.nextInt();
+        ArrayQueue queue = new ArrayQueue(size);
+        System.out.println("Enter the elements with space delimiter eg. 12 24 23 and to terminate with 0");
+        while (sc.hasNext()) {
+            int x = sc.nextInt();
+            if (x == 0)
+                break;
+            else
+                queue.enqueue(x);
+        }
 
-        // Queue site exceeded, should throw exception
-        queue.enqueue(11);
 
         System.out.println("No of items in queue =" + queue.qsize());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-        System.out.println(queue.dequeue());
-
-        //exception testing
-        System.out.println(queue.dequeue());
+        while (!queue.isEmpty())
+            System.out.println(queue.dequeue());
 
 
     }

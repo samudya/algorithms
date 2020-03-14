@@ -1,6 +1,5 @@
-/workspace.xml
-.idea/
+.idea
+*.iml
 *out*
 *.classes
-*.iml
 /misc.xml
